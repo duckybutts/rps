@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    
+    
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="styles.css" />
     <meta charset="UTF-8" />
@@ -10,41 +12,51 @@
   </head>
 
   <body>
+
+  <div class = "bigContainer"> 
     <!-- Header -->
     <div class="header">
       <h1 class="title">Rock Paper Scissors</h1>
     </div>
     <!-- Question to Player -->
-    <h2 class="Question">What do you choose</h2>
+    <h2 class="question">What do you choose?</h2>
     <!-- Images  -->
-    <img src="images/rock.jpg" alt="drawing of a rock" />
-    <img src="images/paper.jpg" alt="drawing of paper" />
-    <img src="images/scissors.jpg" alt="drawing of scissors" />
+    <div class = imageCon>
+    <img class = "image rock"src="images/rock.jpg" alt="drawing of a rock" />
+    <img class = "image paper"src="images/paper.jpg" alt="drawing of paper" />
+    <img class = "image scissors"src="images/scissors.jpg" alt="drawing of scissors" />
+  </div>
+  <!-- container for everything -->
+  <div class = "container"> 
+  <!-- Box with info -->
+  <div class = "info">
+    <div class = "content"> 
     <!-- Round -->
     <div class = "roundCon"> 
         <h3 class = "round">Round:</h3>
-        <h3 class = "roundNum"> </h3>
+        <h3 class = "roundNum">1</h3>
     </div>
     <!-- Round Results -->
     <div class = "resultsCon">
-        <h4 class = resultsTxt">Results:</h4>
-        <h4 class = results></h4>
-    </div>
-    <!-- Score -->
+        <h4 class = resultsTxt"></h4>
+         <!-- Score -->
     <div class = "scoreCon"> 
-        <div class = "player">
-            <h5> You: </h5>
-            <h5 class "playerScore"> </h5>
-        </div>
-        <div class = "computer"> 
-            <h5> Computer: </h5>
-            <h5 class "computerScore"> </h5>
-        </div>
+      <div class = "player">
+          <h5> You: </h5>
+          <h5 class "playerScore"> 0 </h5>
+      </div>
+      <div class = "computer"> 
+          <h5> Comp: </h5>
+          <h5 class "computerScore"> 0 </h5>
+      </div>
+  </div>
     </div>
     <!-- Play again -->
-    <button class = again> Play again </button>
-
-
-
+    <div class = "btnCon">
+      <button class = restart> Restart </button>
+     </div>
+    </div>
+    </div>
+  </div>
   </body>
 </html>
