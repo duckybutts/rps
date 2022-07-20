@@ -82,17 +82,17 @@ function match(player) {
 
 let win = function () {
   scorePlayer++;
-  checkWinner();
   resultsTxt.textContent = `You won! ${playerChoice} beats ${computerChoice}`;
   resultsTxt.style.color = "#4BA65C";
+  checkWinner();
   playing = false;
   scorePlayerTxt.textContent = scorePlayer;
 };
 let lose = function () {
   scoreComp++;
-  checkWinner();
   resultsTxt.textContent = `You lost ${computerChoice} beats ${playerChoice}`;
   resultsTxt.style.color = "#C55858";
+  checkWinner();
   playing = false;
   scoreComputerTxt.textContent = scoreComp;
   return scoreComp;
@@ -142,9 +142,22 @@ function reset() {
 }
 
 function checkWinner() {
-  if (scorePlayer >= 2 || scoreComp >= 2) {
-    playing = false;
+  if (scorePlayer >= 1 || scoreComp >= 1) {
+    gameOver();
   } else {
     playing = true;
+  }
+}
+
+function gameOver() {
+  playing = false;
+  roundTxt.textContent = "Game Over";
+  roundTxt.style.fontSize = "xx-large";
+  if (scorePlayer > scoreComp) {
+    resultsTxt.textContent = 'You won! Press "restart" to play again!';
+    resultsTxt.style.color = "#4BA65C";
+  } else {
+    resultsTxt.textContent = 'You lost. Press  "restart" to try again.  ';
+    resultsTxt.style.color = "#C55858";
   }
 }
