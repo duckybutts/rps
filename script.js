@@ -82,6 +82,7 @@ function match(player) {
 
 let win = function () {
   scorePlayer++;
+  checkWinner();
   resultsTxt.textContent = `You won! ${playerChoice} beats ${computerChoice}`;
   resultsTxt.style.color = "#4BA65C";
   playing = false;
@@ -89,10 +90,12 @@ let win = function () {
 };
 let lose = function () {
   scoreComp++;
+  checkWinner();
   resultsTxt.textContent = `You lost ${computerChoice} beats ${playerChoice}`;
   resultsTxt.style.color = "#C55858";
   playing = false;
   scoreComputerTxt.textContent = scoreComp;
+  return scoreComp;
 };
 let draw = function () {
   resultsTxt.textContent = `It's a tie. You both chose ${playerChoice}`;
@@ -104,9 +107,30 @@ let draw = function () {
 // console.log(chosen);
 
 function nextRound() {
-  round++;
+  if (playing) {
+    round++;
+  }
+  reset();
+}
+
+next.addEventListener("click", function () {
+  if (!playing) {
+    nextRound();
+  }
+});
+
+restart.addEventListener("click", function () {
+  round = 1;
+  scorePlayer = 0;
+  scoreComp = 0;
+  scorePlayerTxt.textContent = scorePlayer;
+  scoreComputerTxt.textContent = scoreComp;
+  reset();
+});
+
+function reset() {
+  checkWinner();
   getPlayerChoice();
-  playing = true;
   roundTxt.textContent = round;
   resultsTxt.textContent = "";
   playerChoice = undefined;
@@ -117,8 +141,10 @@ function nextRound() {
   document.querySelector(".content").style.backgroundColor = "white";
 }
 
-next.addEventListener("click", function () {
-  if (!playing) {
-    nextRound();
+function checkWinner() {
+  if (scorePlayer >= 2 || scoreComp >= 2) {
+    playing = false;
+  } else {
+    playing = true;
   }
-});
+}
