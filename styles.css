@@ -5,6 +5,8 @@ body {
 }
 
 .bigContainer {
+  display: flex;
+  flex-direction: column;
   background-color: #c3fdff;
   border: black 2px solid;
 }
@@ -17,7 +19,6 @@ body {
   font-family: "chalkduster", fantasy;
   text-align: center;
   font-size: 30px;
-  padding-bottom: 0px;
 }
 
 .question {
@@ -26,8 +27,9 @@ body {
 }
 
 .image {
-  width: 200px;
-  height: 200px;
+  max-width: 200px;
+  min-width: 10%;
+  height: auto;
   border: black 3px solid;
   background-color: white;
 }
@@ -50,13 +52,17 @@ body {
 }
 
 .content {
-  padding: 20px 300px;
+  max-width: 900px;
+  min-width: 640px;
+  min-height: 300px;
+  max-height: 700px;
 }
 
 .container {
   display: flex;
   justify-content: center;
-  margin: 50px;
+  margin: 50px 0px;
+  align-items: center;
 }
 
 .scoreCon {
@@ -87,6 +93,7 @@ body {
   font-weight: bolder;
   width: 150px;
   height: 60px;
+  margin-bottom: 20px;
 }
 
 .selected {
@@ -99,7 +106,7 @@ body {
 }
 
 .roundCon {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .resultsTxt {
