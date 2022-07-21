@@ -1,20 +1,20 @@
+let playing = true;
+let choices = ["rock", "paper", "scissors"];
 let rock = document.querySelector(".rock");
 let paper = document.querySelector(".paper");
 let scissors = document.querySelector(".scissors");
-let restart = document.querySelector(".restart");
-let next = document.querySelector(".next");
+let round = 1;
 let roundTxt = document.querySelector(".roundNum");
-let resultsTxt = document.querySelector(".resultsTxt");
+let scorePlayer = 0;
 let scorePlayerTxt = document.querySelector(".playerScore");
 let scoreComputerTxt = document.querySelector(".computerScore");
-let round = 1;
-let scorePlayer = 0;
 let scoreComp = 0;
-let choices = ["rock", "paper", "scissors"];
-let playing = true;
+let resultsTxt = document.querySelector(".resultsTxt");
 let playerChoice;
+let restart = document.querySelector(".restart");
+let next = document.querySelector(".next");
 
-getPlayerChoice();
+getPlayerChoice(); //  allows input from player to begin game
 
 function getPlayerChoice() {
   playerClick();
@@ -23,7 +23,7 @@ function getPlayerChoice() {
     rock.addEventListener("click", function () {
       if (playing) {
         playerChoice = "rock";
-        match("rock");
+        match();
         rock.classList.add("selected");
         paper.classList.add("unSelected");
         scissors.classList.add("unSelected");
@@ -32,7 +32,7 @@ function getPlayerChoice() {
     paper.addEventListener("click", function () {
       if (playing) {
         playerChoice = "paper";
-        match("paper");
+        match();
         rock.classList.add("unSelected");
         paper.classList.add("selected");
         scissors.classList.add("unSelected");
@@ -41,29 +41,26 @@ function getPlayerChoice() {
     scissors.addEventListener("click", function () {
       if (playing) {
         playerChoice = "scissors";
-        match("scissors");
+        match();
         rock.classList.add("unSelected");
         paper.classList.add("unSelected");
         scissors.classList.add("selected");
       }
     });
-    return playerChoice;
   }
-  return playerChoice;
 }
 
-// console.log(playerChoice);
-
+// calc computer choice
 let getComputerChoice = () => {
   let i = Math.floor(Math.random() * choices.length);
   return choices[i];
 };
-
 let computerChoice = getComputerChoice();
 
-function match(player) {
+//plays rps
+function match() {
   computerChoice = getComputerChoice();
-  if (player == computerChoice) {
+  if (playerChoice == computerChoice) {
     draw();
   } else if (
     (playerChoice == "rock" && computerChoice == "scissors") ||
@@ -72,9 +69,9 @@ function match(player) {
   ) {
     win();
   } else if (
-    (computerChoice == "rock" && player == "scissors") ||
-    (computerChoice == "paper" && player == "rock") ||
-    (computerChoice == "scissors" && player == "paper")
+    (computerChoice == "rock" && playerChoice == "scissors") ||
+    (computerChoice == "paper" && playerChoice == "rock") ||
+    (computerChoice == "scissors" && playerChoice == "paper")
   ) {
     lose();
   }
@@ -95,7 +92,6 @@ let lose = function () {
   checkWinner();
   playing = false;
   scoreComputerTxt.textContent = scoreComp;
-  return scoreComp;
 };
 let draw = function () {
   resultsTxt.textContent = `It's a tie. You both chose ${playerChoice}`;
@@ -103,22 +99,33 @@ let draw = function () {
   playing = false;
 };
 
-// chosen = true;
-// console.log(chosen);
-
-function nextRound() {
-  if (playing) {
-    round++;
-  }
-  reset();
-}
-
+//Ensures player cannot increase round # without playing
 next.addEventListener("click", function () {
   if (!playing) {
     nextRound();
   }
 });
 
+//Ensures player cannot go to next round before making a selection
+function nextRound() {
+  if (playing) {
+    round++;
+  }
+  reset();
+}
+//Resets UI saves score
+function reset() {
+  checkWinner();
+  getPlayerChoice();
+  roundTxt.textContent = round;
+  resultsTxt.textContent = "";
+  rock.classList.remove("unSelected", "selected");
+  paper.classList.remove("unSelected", "selected");
+  scissors.classList.remove("unSelected", "selected");
+  document.querySelector(".content").style.backgroundColor = "white";
+}
+
+//Resets UI deletes score
 restart.addEventListener("click", function () {
   round = 1;
   scorePlayer = 0;
@@ -128,19 +135,6 @@ restart.addEventListener("click", function () {
   reset();
 });
 
-function reset() {
-  checkWinner();
-  getPlayerChoice();
-  roundTxt.textContent = round;
-  resultsTxt.textContent = "";
-  playerChoice = undefined;
-  computerChoice = undefined;
-  rock.classList.remove("unSelected", "selected");
-  paper.classList.remove("unSelected", "selected");
-  scissors.classList.remove("unSelected", "selected");
-  document.querySelector(".content").style.backgroundColor = "white";
-}
-
 function checkWinner() {
   if (scorePlayer >= 5 || scoreComp >= 5) {
     gameOver();
@@ -148,7 +142,7 @@ function checkWinner() {
     playing = true;
   }
 }
-
+//display gameover screen
 function gameOver() {
   playing = false;
   roundTxt.textContent = "Game Over";
