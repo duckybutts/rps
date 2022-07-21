@@ -142,7 +142,7 @@ function reset() {
 }
 
 function checkWinner() {
-  if (scorePlayer >= 1 || scoreComp >= 1) {
+  if (scorePlayer >= 5 || scoreComp >= 5) {
     gameOver();
   } else {
     playing = true;
